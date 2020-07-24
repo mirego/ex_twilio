@@ -1,8 +1,8 @@
 use Mix.Config
 
 config :ex_twilio,
-  account_sid: {:system, "TWILIO_TEST_ACCOUNT_SID"},
-  auth_token: {:system, "TWILIO_TEST_AUTH_TOKEN"},
-  workspace_sid: {:system, "TWILIO_TEST_WORKSPACE_SID"}
+  account_sid: "1",
+  auth_token: "2",
+  workspace_sid: "3"
 
 config :logger, level: :info
