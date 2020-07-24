@@ -236,7 +236,7 @@ defmodule ExTwilio.WorkerCapability do
       "url" => url,
       "post_filter" => post_filters,
       "method" => method,
-      "allowed" => allowed,
+      "allow" => allowed,
       "query_filter" => query_filters
     }
   end

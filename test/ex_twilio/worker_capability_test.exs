@@ -38,6 +38,20 @@ defmodule ExTwilio.WorkerCapabilityTest do
            ] == Config.account_sid()
   end
 
+  test ".token sets valid policy" do
+    jwt =
+      ExTwilio.WorkerCapability.new("worker_sid", "workspace_sid")
+      |> ExTwilio.WorkerCapability.allow_activity_updates()
+      |> ExTwilio.WorkerCapability.allow_reservation_updates()
+
+    allow_properties =
+      decoded_token(jwt).claims
+      |> get_in(["policies", Access.all(), "allow"])
+      |> Enum.uniq()
+
+    assert allow_properties === [true]
+  end
+
   test ".token sets 9 policies" do
     jwt =
       ExTwilio.WorkerCapability.new("worker_sid", "workspace_sid")
