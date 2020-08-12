@@ -35,7 +35,7 @@ jobs:
           path: _build
           key: ${{ runner.os }}-build-${{ matrix.otp-version }}-${{ matrix.elixir-version }}-${{ hashFiles(format('{0}/mix.lock', github.workspace)) }}
 
+      - run: mix deps.get
       - run: mix format --check-formatted
       - run: mix compile --warning-as-errors --force
-      - run: mix deps.get
       - run: mix test
