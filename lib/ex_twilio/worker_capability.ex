@@ -165,9 +165,12 @@ defmodule ExTwilio.WorkerCapability do
           workspace_sid: workspace_sid
         }
       ) do
-    policies = allow(policies, task_url(workspace_sid), "POST")
-    policy = add_policy(worker_reservation_url(workspace_sid, worker_sid), "POST")
-    Map.put(capability_struct, :policies, [policy | policies])
+
+    Map.put(capability_struct, :policies, List.flatten([
+      allow(policies, task_url(workspace_sid), "POST"),
+      add_policy(worker_reservation_url(workspace_sid, worker_sid), "GET"),
+      add_policy(worker_reservation_url(workspace_sid, worker_sid), "POST")
+    ]))
   end
 
   @doc """
