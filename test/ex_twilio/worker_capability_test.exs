@@ -52,13 +52,13 @@ defmodule ExTwilio.WorkerCapabilityTest do
     assert allow_properties === [true]
   end
 
-  test ".token sets 9 policies" do
+  test ".token sets 10 policies" do
     jwt =
       ExTwilio.WorkerCapability.new("worker_sid", "workspace_sid")
       |> ExTwilio.WorkerCapability.allow_activity_updates()
       |> ExTwilio.WorkerCapability.allow_reservation_updates()
 
-    assert length(decoded_token(jwt).claims["policies"]) == 9
+    assert length(decoded_token(jwt).claims["policies"]) == 10
   end
 
   defp decoded_token(capability) do
