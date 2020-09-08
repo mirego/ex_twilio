@@ -5,13 +5,16 @@ defmodule ExTwilio.ProgrammableChat.UserChannel do
   - [Twilio docs](https://www.twilio.com/docs/api/chat/rest/user-channels)
   """
 
-  defstruct sid: nil,
-            account_sid: nil,
+  defstruct account_sid: nil,
             service_sid: nil,
+            channel_sid: nil,
+            member_sid: nil,
             unread_messages_count: nil,
             last_consumed_message_index: nil,
-            channel: nil,
-            member: nil
+            status: nil,
+            notification_level: nil,
+            url: nil,
+            links: nil
 
   use ExTwilio.Resource,
     import: [
@@ -20,6 +23,7 @@ defmodule ExTwilio.ProgrammableChat.UserChannel do
     ]
 
   def resource_name, do: "Channels"
+  def resource_collection_name, do: "channels"
 
   def parents,
     do: [
