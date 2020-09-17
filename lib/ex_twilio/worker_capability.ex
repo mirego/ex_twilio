@@ -158,6 +158,19 @@ defmodule ExTwilio.WorkerCapability do
     Map.put(capability_struct, :policies, [policy | policies])
   end
 
+  def allow_task_channels_read(
+        capability_struct = %__MODULE__{
+          policies: policies,
+          worker_sid: worker_sid,
+          workspace_sid: workspace_sid
+        }
+      ) do
+    policy =
+      add_policy(worker_task_channels_url(workspace_sid, worker_sid), "GET")
+
+    Map.put(capability_struct, :policies, [policy | policies])
+  end
+
   def allow_reservation_updates(
         capability_struct = %__MODULE__{
           policies: policies,
@@ -270,5 +283,9 @@ defmodule ExTwilio.WorkerCapability do
 
   defp worker_reservations_url(workspace_sid, worker_sid) do
     "#{workspaces_base_url(workspace_sid)}/Workers/#{worker_sid}/Reservations/**"
+  end
+
+  defp worker_task_channels_url(workspace_sid, worker_sid) do
+    "#{workspaces_base_url(workspace_sid)}/Workers/#{worker_sid}/Channels/**"
   end
 end
